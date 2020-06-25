@@ -4,6 +4,7 @@ let addMessage = document.querySelector('.message'),
    todo = document.querySelector('.todo');
 
 let todolist = [];
+let donelist = [];
 
 if(localStorage.getItem('todo')){
     todolist = JSON.parse(localStorage.getItem('todo'));
@@ -18,8 +19,8 @@ addButton.addEventListener('click',function(){
     let newTodo = {                /**создание массива */
         todo: addMessage.value,
         checked: false,
-        important: false
-    };
+        important: false,
+    }
 
     todolist.push(newTodo);  /*добовление  li в пустой массив*/
     displayMessages();
@@ -30,6 +31,8 @@ addButton.addEventListener('click',function(){
 function displayMessages(){
     let displayMessage = '';
     if(todolist.length === 0) todo.innerHTML = '';
+
+    
     todolist.forEach(function(item, i){
         displayMessage += `
         <li>
@@ -37,7 +40,10 @@ function displayMessages(){
         <label for='item_${i}' class="${item. important? 'important' : ''}">${item.todo}</label>
         </li>  
         `;
+        
+
         todo.innerHTML = displayMessage;
+        document.getElementById('js-all-tasks').innerHTML = todolist.length;
     });
 }
 
@@ -49,6 +55,13 @@ todo.addEventListener('change', function(event){
     todolist.forEach(function(item){
         if(item.todo === valueLabel){
             item.checked = !item.checked;
+            if(item.checked){
+                donelist.push(item);
+            }else{
+                donelist.pop();
+            }
+            document.getElementById('js-done-tasks').innerHTML = donelist.length;
+
             localStorage.setItem('todo', JSON.stringify(todolist)); /**сохранение данных */
         }
     });

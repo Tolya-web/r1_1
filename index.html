@@ -11,9 +11,19 @@
 
         <div class="todo_list">
              <h1>ToDo list</h1>
+             <div class="app__info">
+				<div class="app__info-item">
+					<span class="app__info-text">Всего задач</span>
+					<span class="app__info-number" id="js-all-tasks"></span>
+				</div>
+				<div class="app__info-item">
+					<span class="app__info-text">Выполнено задач</span>
+					<span class="app__info-number" id="js-done-tasks"></span>
+				</div>
+			</div>
             <div class="create_new_todo">
-                <input type="text" class="message" placeholder="Создание задания">
-                <input type="text" id="input" placeholder="поиск">
+                <input type="text" class="message" placeholder="Создание задач">
+                <input type="text" id="input" placeholder="поиск задач">
                 <button class="add">Добавить</button>
             </div>
      
