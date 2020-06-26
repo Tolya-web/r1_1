@@ -27,7 +27,9 @@ body {
    
    }
 
- 
+   input:checked + span {
+    text-decoration: line-through;
+   }
 
 
   h1 {

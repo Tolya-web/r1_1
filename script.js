@@ -4,7 +4,7 @@ let addMessage = document.querySelector('.message'),
    todo = document.querySelector('.todo');
 
 let todolist = [];
-let donelist = [];
+let donelist = 0;
 
 if(localStorage.getItem('todo')){
     todolist = JSON.parse(localStorage.getItem('todo'));
@@ -24,6 +24,7 @@ addButton.addEventListener('click',function(){
 
     todolist.push(newTodo);  /*добовление  li в пустой массив*/
     displayMessages();
+    document.getElementById("message_id").value = "";
     localStorage.setItem('todo', JSON.stringify(todolist));
    
 });
@@ -37,7 +38,7 @@ function displayMessages(){
         displayMessage += `
         <li>
         <input type='checkbox' id='item_${i}' ${item. checked ? 'checked' : ''}>   
-        <label for='item_${i}' class="${item. important? 'important' : ''}">${item.todo}</label>
+        <span for='item_${i}' class="${item. important? 'important' : ''}">${item.todo}</span>
         </li>  
         `;
         
@@ -56,11 +57,11 @@ todo.addEventListener('change', function(event){
         if(item.todo === valueLabel){
             item.checked = !item.checked;
             if(item.checked){
-                donelist.push(item);
+                donelist += 1;
             }else{
-                donelist.pop();
+                donelist -= 1;
             }
-            document.getElementById('js-done-tasks').innerHTML = donelist.length;
+            document.getElementById('js-done-tasks').innerHTML = donelist;
 
             localStorage.setItem('todo', JSON.stringify(todolist)); /**сохранение данных */
         }
